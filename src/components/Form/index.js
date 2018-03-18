@@ -22,6 +22,12 @@ class Form extends Component {
             <label className="label">
               <h2 className="extra-label">Extra (per month):</h2>
             </label>
+            <label className="label">
+              <h2 className="extra-label">Remaining Loan:</h2>
+            </label>
+            <label className="label">
+              <h2 className="extra-label">Remaining Term:</h2>
+            </label>
           </div>
           <div className="inputs">
             <Input
@@ -50,6 +56,20 @@ class Form extends Component {
               value={this.props.extra}
               onChange={this.props.handleChange}
             />
+            <Input
+              min="0"
+              name="remainingLoan"
+              type="number"
+              value={this.props.remainingLoan}
+              onChange={this.props.handleChange}
+            />
+            <Input
+              min="0"
+              name="remainingTerm"
+              type="number"
+              value={this.props.remainingTerm}
+              onChange={this.props.handleChange}
+            />
           </div>
         </div>
       </form>
@@ -64,20 +84,3 @@ Form.propTypes = {
 }
 
 export default Form;
-
-/*
-<Input
-  min="0"
-  name="remainingLoan"
-  type="number"
-  value={this.props.remainingLoan}
-  onChange={this.props.handleChange}
-/>
-<Input
-  min="0"
-  name="remainingTerm"
-  type="number"
-  value={this.props.remainingTerm}
-  onChange={this.props.handleChange}
-/>
-*/

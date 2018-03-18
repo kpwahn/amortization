@@ -10,8 +10,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      loanAmount: '200000',
-      remainingLoan: '0',
+      loanAmount: '250000',
+      remainingLoan: '250000',
       apr: '4.5',
       term: '30',  // In years
       remainingTerm: '30',
@@ -24,6 +24,10 @@ class App extends Component {
   handleChange(event) {
     const name = event.target.name;
     let value = event.target.value;
+
+    if(name === 'remainingTerm' && value > this.state.term) {
+      value = this.state.term;
+    }
 
     this.setState({
       [name]: value

@@ -47,7 +47,9 @@ class Amortization extends Component {
     let monthlyPayment = loanAmount * ( ( aprPerMonth * Math.pow( ( 1 + aprPerMonth ), numMonths ) )
                                       / ( Math.pow( (1 + aprPerMonth ), numMonths ) - 1 ) );
 
-    loanAmount = loanAmount - this.props.remainingLoan;
+    loanAmount = this.props.remainingLoan;
+
+
 
     let rowsWithoutExtra = this.calcRows({numMonths, loanAmount, monthlyPayment, aprPerMonth, extra: 0});
     let rowsWithExtra = this.calcRows({numMonths, loanAmount, monthlyPayment, aprPerMonth, extra: this.props.extra});
@@ -58,12 +60,33 @@ class Amortization extends Component {
     let totalInterestPaid = (lastRowWithoutExtra) ? lastRowWithExtra.totalInterestPaid : 0;
     let totalInterestSaved = (lastRowWithoutExtra || lastRowWithExtra) ? lastRowWithoutExtra.totalInterestPaid - lastRowWithExtra.totalInterestPaid : 0;
 
-    // let numMonthsLeft = this.props.remainingTerm * 12;
-    //
-    // if(numMonthsLeft !== numMonths) {
-    //   rowsWithoutExtra = rowsWithoutExtra.slice(numMonths - numMonthsLeft, numMonths);
-    //   rowsWithExtra = rowsWithExtra.slice(numMonths - numMonthsLeft, numMonths);
-    // }
+    let years = ((numMonths - rowsWithExtra.length) / 12);
+    let months = numMonths - rowsWithExtra.length;
+
+
+
+let x = 360 - (this.props.remainingTerm * 12);
+console.log(x)
+let y = rowsWithExtra[x];
+console.log(y)
+
+
+    let numMonthsLeft = this.props.remainingTerm * 12;
+
+    if(numMonthsLeft !== numMonths) {
+      rowsWithoutExtra = rowsWithoutExtra.slice(numMonths - numMonthsLeft, numMonths);
+      rowsWithExtra = rowsWithExtra.slice(numMonths - numMonthsLeft, numMonths);
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     return (
@@ -72,7 +95,7 @@ class Amortization extends Component {
             <h1 className="numbers">Monthly Payment: <span className="heading"> ${monthlyPayment.toFixed(2)} </span> </h1>
             <h1 className="numbers">Total Interest: <span className="heading"> ${totalInterestPaid.toFixed(2)} </span> </h1>
             <h1 className="numbers">Total Saved: <span className="heading"> ${totalInterestSaved.toFixed(2)} </span> </h1>
-            <h1 className="numbers">Months saved: <span className="heading"> {numMonths - rowsWithExtra.length} &nbsp; ({((numMonths - rowsWithExtra.length) / 12).toFixed(1)} Years) </span></h1>
+            <h1 className="numbers">Months saved: <span className="heading"> {months} &nbsp; ({years.toFixed(1)} Years) </span></h1>
           </div>
           <hr/>
           <TableWrapper rows={rowsWithExtra} />
