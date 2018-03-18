@@ -1,0 +1,38 @@
+.Table {
+
+}
+
+.table-row {
+  display: flex;
+}
+
+.table-cell {
+  margin: 0px 15px;
+}
+
+.monthly-payment {
+  display: flex;
+  justify-content: space-around;
+}
+
+.numbers {
+  display: flex;
+  margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .monthly-payment {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heading {
+    display: block;
+    font-size: 20px;
+  }
+
+  .numbers {
+    flex-direction: column;
+    align-items: center;
+  }
+}
